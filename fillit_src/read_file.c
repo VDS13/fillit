@@ -6,7 +6,7 @@
 /*   By: dnichol <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 16:14:53 by dnichol           #+#    #+#             */
-/*   Updated: 2019/10/01 17:23:04 by dnichol          ###   ########.fr       */
+/*   Updated: 2019/10/03 16:18:10 by dnichol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,11 @@ char			**read_fillit(char *str)
 	int		fd;
 	size_t	size;
 	char	**line;
+	char	**dest;
 
 	line = NULL;
-	if (check_filename(str) && (size = size_file(str)))
+	size = size_file(str);
+	if (size)
 	{
 		fd = open(str, O_RDONLY);
 		if (fd < 0)
@@ -72,10 +74,13 @@ char			**read_fillit(char *str)
 		if (line == NULL)
 			return (ft_error());
 		if (!check_valfile(line) || !check_valfile_p2(line) ||
-				!check_tetr(line))
+				!(dest = check_tetr(line)))
+		{
+			freem(line);
 			return (ft_error());
+		}
 	}
 	else
 		return (ft_error());
-	return (line);
+	return (dest);
 }

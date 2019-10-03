@@ -6,7 +6,7 @@
 /*   By: dnichol <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 13:37:36 by dnichol           #+#    #+#             */
-/*   Updated: 2019/10/01 18:14:51 by dnichol          ###   ########.fr       */
+/*   Updated: 2019/10/03 17:11:14 by dnichol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,10 @@ static int	check_p(const char *str, char **line)
 	return (0);
 }
 
-static int	check_one(char **line)
+static char	*check_one(char **line)
 {
-	int	k;
+	int		k;
+	char	*dest;
 
 	k = 0;
 	while (g_slates[k])
@@ -83,28 +84,37 @@ static int	check_one(char **line)
 		if (!check_p(g_slates[k], line))
 			k++;
 		else
-			return (1);
+		{
+			dest = ft_strdup(g_slates[k]);
+			return (dest);
+		}
 	}
-	return (0);
+	return (NULL);
 }
 
-int			check_tetr(char **line)
+char		**check_tetr(char **line)
 {
-	int	i;
-	int	k;
+	int		i;
+	int		k;
+	char	**dest;
 
 	i = 0;
 	while (line[i])
 		i++;
 	k = (i + 1) / 5;
+	dest = (char**)malloc(sizeof(char*) * (k + 1));
 	i = 0;
 	while (i < k)
 	{
-		if (!check_one(line + 4 * i + i))
-			break ;
-		i++;
+		dest[i] = check_one(line + 4 * i + i);
+		if (dest[i])
+			i++;
+		else
+		{
+			freem(dest);
+			return (NULL);
+		}
 	}
-	if (i != k)
-		return (0);
-	return (1);
+	dest[k] = NULL;
+	return (dest);
 }

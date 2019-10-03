@@ -6,7 +6,7 @@
 /*   By: dnichol <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 15:21:11 by dnichol           #+#    #+#             */
-/*   Updated: 2019/10/01 17:05:36 by dnichol          ###   ########.fr       */
+/*   Updated: 2019/10/03 16:11:09 by dnichol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include <fcntl.h>
 
 char	**ft_error(void);
-int		check_tetr(char **line);
-int		check_filename(char *str);
+char	**check_tetr(char **line);
 int		check_valfile(char **line);
 int		check_valfile_p2(char **line);
 char	**read_fillit(char *str);
+void	freem(char **line);
 
 #endif
