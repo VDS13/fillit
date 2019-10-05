@@ -18,13 +18,16 @@ void	freem(char **line)
 
 	i = 0;
 	while (line[i])
+	{
 		free(line[i]);
+		i++;
+	}
 	free(line);
 }
 
 char	**ft_error(void)
 {
-	ft_putstr_fd("error", 2);
+	ft_putstr_fd("error", 1);
 	ft_putchar_fd('\n', 1);
 	return (NULL);
 }
@@ -68,7 +71,7 @@ int		check_valfile_p2(char **line)
 	while (line[i])
 	{
 		j = 0;
-		while (line[i][j] != '\0')
+		while (line[i][j])
 		{
 			if (line[i][j] == '#')
 				ch++;

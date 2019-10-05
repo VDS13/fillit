@@ -6,7 +6,7 @@
 /*   By: dnichol <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 13:37:36 by dnichol           #+#    #+#             */
-/*   Updated: 2019/10/03 17:11:14 by dnichol          ###   ########.fr       */
+/*   Updated: 2019/10/05 16:00:05 by dnichol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ static char	*check_one(char **line)
 		else
 		{
 			dest = ft_strdup(g_slates[k]);
+			k = 0;
 			return (dest);
 		}
 	}
@@ -102,6 +103,8 @@ char		**check_tetr(char **line)
 	while (line[i])
 		i++;
 	k = (i + 1) / 5;
+	if (k > 27)
+		return (NULL);
 	dest = (char**)malloc(sizeof(char*) * (k + 1));
 	i = 0;
 	while (i < k)
