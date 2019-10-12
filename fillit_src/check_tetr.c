@@ -29,20 +29,19 @@ static int	check_last(const char *str, char **line, int i, int j)
 	m = 0;
 	while (line[i] && i < 4)
 	{
-		j = 0;
 		while (line[i][j] && str[l])
 		{
-			if (str[l] == line[i][j++])
+			if (str[l] == line[i][j])
 			{
 				if (str[l] == '#')
 					m++;
 				l++;
+				j++;
 			}
 			else
-				break ;
+				return (0);
 		}
-		if (j != 4)
-			break ;
+		j = 0;
 		i++;
 	}
 	if (m == 4)
@@ -86,7 +85,6 @@ static char	*check_one(char **line)
 		else
 		{
 			dest = ft_strdup(g_slates[k]);
-			k = 0;
 			return (dest);
 		}
 	}
@@ -103,7 +101,7 @@ char		**check_tetr(char **line)
 	while (line[i])
 		i++;
 	k = (i + 1) / 5;
-	if (k > 27)
+	if (k > 26)
 		return (NULL);
 	dest = (char**)malloc(sizeof(char*) * (k + 1));
 	i = 0;

@@ -12,6 +12,12 @@
 
 #include "../includes/libft.h"
 
+static int	free_dest(char **dest, int fd)
+{
+	ft_strdel(&dest[fd]);
+	return (0);
+}
+
 static int	ft_modstrdup(char **line, char **dest, const int fd)
 {
 	size_t	i;
@@ -59,6 +65,6 @@ int			get_next_line(const int fd, char **line)
 	if (n == -1)
 		return (-1);
 	if (n == 0 && (dest[fd] == NULL || dest[fd][0] == '\0'))
-		return (0);
+		return (free_dest(dest, fd));
 	return (ft_modstrdup(line, dest, fd));
 }

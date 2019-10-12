@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnichol <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lcaesar <lcaesar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 13:58:11 by dnichol           #+#    #+#             */
-/*   Updated: 2019/10/03 16:19:34 by dnichol          ###   ########.fr       */
+/*   Updated: 2019/10/11 12:29:53 by dnichol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	freem(char **line)
 {
-   	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])
@@ -53,7 +53,7 @@ int		check_valfile(char **line)
 			if (j != 4)
 				return (0);
 		if ((i - 4) % 5 == 0)
-			if (j != 0)
+			if (j != 0 || (j == 0 && !line[i + 1]))
 				return (0);
 		i++;
 	}
@@ -86,5 +86,29 @@ int		check_valfile_p2(char **line)
 				ch = 0;
 		}
 	}
+	return (1);
+}
+
+int		check_valfile_p3(char **line)
+{
+	int	i;
+	int	j;
+	int	ch;
+
+	i = 0;
+	ch = 0;
+	while (line[i])
+	{
+		j = 0;
+		while (line[i][j])
+		{
+			if (line[i][j] == '#')
+				ch++;
+			j++;
+		}
+		i++;
+	}
+	if (ch % 4 != 0 || (i + 1) % 5 != 0)
+		return (0);
 	return (1);
 }

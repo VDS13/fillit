@@ -6,7 +6,7 @@
 /*   By: dnichol <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 19:22:17 by dnichol           #+#    #+#             */
-/*   Updated: 2019/09/12 15:26:02 by dnichol          ###   ########.fr       */
+/*   Updated: 2019/10/09 16:40:34 by dnichol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,6 @@ void				ft_freemat(char **dest, int j);
 int					ft_sqrt(int nb);
 char				*ft_charmap(char *tab, size_t length, char (*f)(char));
 
-int                 get_next_line(const int fd, char **line);
+int					get_next_line(const int fd, char **line);
 
 #endif

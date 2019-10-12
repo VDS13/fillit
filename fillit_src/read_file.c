@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnichol <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lcaesar <lcaesar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 16:14:53 by dnichol           #+#    #+#             */
-/*   Updated: 2019/10/05 16:00:21 by dnichol          ###   ########.fr       */
+/*   Updated: 2019/10/10 19:20:50 by dnichol          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+static size_t	size_mat(size_t size)
+{
+	if (size <= 20)
+		return (5);
+	else
+		return (size / 4 + size / 16 - 1);
+}
 
 static size_t	size_file(char *str)
 {
@@ -41,7 +49,7 @@ static char		**read_from_file(const int fd, size_t size)
 
 	i = 0;
 	n = 1;
-	buff = (char**)malloc(sizeof(char*) * ((size / 4) + (size / 16 - 1)));
+	buff = (char**)malloc(sizeof(char*) * size_mat(size));
 	while (n)
 	{
 		n = get_next_line(fd, &buff[i]);
@@ -52,7 +60,7 @@ static char		**read_from_file(const int fd, size_t size)
 		}
 		i++;
 	}
-	buff[i] = NULL;
+	buff[i - 1] = NULL;
 	return (buff);
 }
 
@@ -74,13 +82,11 @@ char			**read_fillit(char *str)
 		if (line == NULL)
 			return (ft_error());
 		if (!check_valfile(line) || !check_valfile_p2(line) ||
-				!(dest = check_tetr(line)))
-		{
-			freem(line);
+				!check_valfile_p3(line) || !(dest = check_tetr(line)))
 			return (ft_error());
-		}
 	}
 	else
 		return (ft_error());
+	freem(line);
 	return (dest);
 }
